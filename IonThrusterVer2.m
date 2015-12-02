@@ -14,11 +14,11 @@ clc
 
 %Constants
 
-q = 1.602*10^-19;%charge of electron
-m = 9.109*10^-31;%mass of electron
-rocketMass = 2000;%kilograms
-ionFlowRate = 10000;%ion/sec
-massOfIon = 1*10^-5;%kg/ion
+q = 1.602*10^-19;       %charge of electron
+m = 9.109*10^-31;       %mass of electron
+rocketMass = 2000;      %kilograms
+ionFlowRate = 10000;    %ion/sec
+massOfIon = 1*10^-5;    %kg/ion
 massOverTime = ionFlowRate*massOfIon;
 
 %End Constants
@@ -32,9 +32,9 @@ ThrustVoltage = 1:100;
 
 for n = 1:100;
     if n == 1
-        ThrustTime(n) = m*sqrt(2*q*10000/m)*log((rocketMass)/(rocketMass - massOverTime*timeArray(n))); 
+        ThrustTime(n) = m*sqrt(2*q*ionFlowRate/m)*log((rocketMass)/(rocketMass - massOverTime*timeArray(n))); 
     else
-        ThrustTime(n) = m*sqrt(2*q*10000/m)*log((rocketMass - massOverTime*timeArray(n-1))/(rocketMass - massOverTime*timeArray(n))); 
+        ThrustTime(n) = m*sqrt(2*q*ionFlowRate/m)*log((rocketMass - massOverTime*timeArray(n-1))/(rocketMass - massOverTime*timeArray(n))); 
     end
 end
 
@@ -47,7 +47,6 @@ for n = 1:100;
 end
 
 figure
-title('Ion Thruster Results');
 subplot(2, 1, 1);
 plot(timeArray, ThrustTime);
 title('Thrust Vs Time');
@@ -56,5 +55,5 @@ ylabel('Thrust(N)');
 subplot(2, 1, 2);
 plot(voltageArray, ThrustVoltage);
 title('Thrust Vs Voltage');
-xlabel('Voltage(s)');
+xlabel('Voltage(V)');
 ylabel('Thrust(N)');
