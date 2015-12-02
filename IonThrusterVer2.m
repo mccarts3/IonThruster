@@ -1,3 +1,15 @@
+% Ion Thruster Project for ECE325
+%
+% Group Members:
+%   Scott McCarney
+%   Wilson Guo
+%   John Buccilli
+%   Alexandre Tessier
+%
+% Works Cited: 
+%   http://ngpdlab.engin.umich.edu/electric-propulsion/field-emission-electric-propulsion
+%   http://descanso.jpl.nasa.gov/SciTechBook/series1/Goebel__cmprsd_opt.pdf
+
 clc
 
 %Constants
@@ -35,11 +47,13 @@ for n = 1:100;
 end
 
 figure
+title('Ion Thruster Results');
+subplot(2, 1, 1);
 plot(timeArray, ThrustTime);
 title('Thrust Vs Time');
 xlabel('Time(s)');
 ylabel('Thrust(N)');
-figure
+subplot(2, 1, 2);
 plot(voltageArray, ThrustVoltage);
 title('Thrust Vs Voltage');
 xlabel('Voltage(s)');
