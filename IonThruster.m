@@ -1,43 +1,41 @@
-% This is the 325 project main file
-clc
+% Ion Thruster Project for 325
+%
+% Group Members:
+%   Scott McCarney
+%   Wilson Guo
+%   John Buccilli
+%   Alexandre Tessier
+%
+% Works Cited: 
+%   http://ngpdlab.engin.umich.edu/electric-propulsion/field-emission-electric-propulsion
+%   http://descanso.jpl.nasa.gov/SciTechBook/series1/Goebel__cmprsd_opt.pdf
 
-%Parallel Plate Parameter
+clc;         % Clear all variables
 
-plateWidth = 1 %1 meter
-plateHeight = .005% 5 mm 
+%%%%% Parameters %%%%%
+% Ion Flow Rate: Based off thruster mass of 200 g 
+% and 12,000 s for specific impulse
+% ngpdlab.engin.umich.edu
+ionFlowRate = 16.67*(10^-6);
+impulseTime = 12000;    % Time thruster is active (s)
+CsMass = 2.2085*10^-25; % Atomic mass of the fuel, Cesium (kg)
+FuelMass = 200*10^-3;   % Initial mass of Cesium fuel (kg)
+massOfRocket = 5.05*10^3;     % Apollo 13 landing mass: 5,050 kg
 
-%Parallel Plate End
+% Thrust array that we will plot
+Thrust = 1:impulseTime;
 
-%Constants
+%
 
-q = 1.602*10^-19;%charge of electron
-m = 9.109*10^-31;%mass of electron
-rocketMass = 2970000;%kilograms
-ionRate = 1*10^6;
-
-%End Constants
-
-voltageArray = 1:100;
-voltageArray = voltageArray*1000000;
-
-eField = voltageArray/plateHeight;
-
-accelArray = q*eField/m;%Acceleration of electron through plates;
-
-ejectVelocityArray = accelArray*plateWidth;
-
-timeArray = 1:100;
-
-Thrust = 1:100;
-
-for n = 1:100
+for n = 1:impulseTime
     if n == 1
         Thrust(n) = ejectVelocityArray(n)*log(rocketMass/(rocketMass - ionRate*m*timeArray(n))); 
     else         
-        Thrust(n) = ejectVelocityArray(n)*log((rocketMass - ionRate*m*timeArray(n-1))/(rocketMass - ionRate*m*timeArray(n))); 
+        % Thrust(n) = ejectVelocityArray(n)*log((rocketMass - ionRate*m*timeArray(n-1))/(rocketMass - ionRate*m*timeArray(n))); 
     end
 end
 
-
+% Debugging Stuff
+% display(CsMass);
 
 plot(timeArray, Thrust);
