@@ -25,14 +25,13 @@ fuelMass = 0.2;         %200 g of fuel
 flowRateKgS = fuelMass / impulseTime;  % 200 g fuel over impulse Time
 massOverTime = ionFlowRate*massOfIon;
 
-%End Constants
-
 %Array
 timeArray = 1:impulseTime;      %1:100
 voltageArray = 1:impulseTime;   %1:100
 voltageArray = 1*10^6*voltageArray;%millions
 ThrustTime = 1:impulseTime;     %1:100
 ThrustVoltage = 1:impulseTime;  %1:100
+velocity = 1:impulseTime;
 
 for n = 1:impulseTime;      %1:100
     if n == 1
@@ -54,14 +53,34 @@ for n = 1:impulseTime;      %1:100
     end
 end
 
+acceleration = ThrustTime.*rocketMass;
+
+for n = 1:impulseTime;
+    if n == 1
+        velocity(n) = acceleration(n);
+    else
+        velocity(n) = acceleration(n)+velocity(n-1);
+    end
+end
+
 figure
-subplot(2, 1, 1);
+subplot(2, 2, 1);
 plot(timeArray, ThrustTime);
 title('Thrust Vs Time');
 xlabel('Time(s)');
 ylabel('Thrust(N)');
-subplot(2, 1, 2);
+subplot(2, 2, 2);
 plot(voltageArray, ThrustVoltage);
 title('Thrust Vs Voltage');
 xlabel('Voltage(V)');
 ylabel('Thrust(N)');
+subplot(2, 2, 3);
+plot(timeArray, acceleration);
+title('Acceleration vs Time');
+xlabel('Time(s)');
+ylabel('Acceleration(m/s^2)');
+subplot(2, 2, 4);
+plot(timeArray, velocity);
+title('Velocity vs Time');
+xlabel('Time(s)');
+ylabel('Velocity(m/s)');
