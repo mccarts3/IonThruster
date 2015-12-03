@@ -21,6 +21,8 @@ rocketMass = 2000;      %kilograms
 ionFlowRate = 10000;    %ion/sec
 impulseTime = 12000;    %Time thruster is active (s)
 massOfIon = 1*10^-5;    %kg/ion
+fuelMass = 0.2;         %200 g of fuel
+flowRateKgS = fuelMass / impulseTime;  % 200 g fuel over impulse Time
 massOverTime = ionFlowRate*massOfIon;
 
 %End Constants
@@ -35,20 +37,20 @@ ThrustVoltage = 1:impulseTime;  %1:100
 for n = 1:impulseTime;      %1:100
     if n == 1
         %ThrustTime(n) = m*sqrt(2*q*ionFlowRate/m)*log((rocketMass)/(rocketMass - massOverTime*timeArray(n))); 
-        ThrustTime(n) = CsMass*sqrt(2*q*ionFlowRate/CsMass)*log((rocketMass)/(rocketMass - massOverTime*timeArray(n))); 
+        ThrustTime(n) = flowRateKgS*sqrt(2*q*ionFlowRate/CsMass)*log((rocketMass)/(rocketMass - massOverTime*timeArray(n))); 
     else
         %ThrustTime(n) = m*sqrt(2*q*ionFlowRate/m)*log((rocketMass - massOverTime*timeArray(n-1))/(rocketMass - massOverTime*timeArray(n)));
-        ThrustTime(n) = CsMass*sqrt(2*q*ionFlowRate/CsMass)*log((rocketMass - massOverTime*timeArray(n-1))/(rocketMass - massOverTime*timeArray(n)));
+        ThrustTime(n) = flowRateKgS*sqrt(2*q*ionFlowRate/CsMass)*log((rocketMass - massOverTime*timeArray(n-1))/(rocketMass - massOverTime*timeArray(n)));
     end
 end
 
 for n = 1:impulseTime;      %1:100
     if n == 1
         %ThrustVoltage(n) = m*sqrt(2*q*voltageArray(n)/m)*log((rocketMass)/(rocketMass - massOverTime*timeArray(1)));
-        ThrustVoltage(n) = CsMass*sqrt(2*q*voltageArray(n)/CsMass)*log((rocketMass)/(rocketMass - massOverTime*timeArray(1))); 
+        ThrustVoltage(n) = flowRateKgS*sqrt(2*q*voltageArray(n)/CsMass)*log((rocketMass)/(rocketMass - massOverTime*timeArray(1))); 
     else
         %ThrustVoltage(n) = m*sqrt(2*q*voltageArray(n)/m)*log((rocketMass - massOverTime*timeArray(1))/(rocketMass - massOverTime*timeArray(2)));
-        ThrustVoltage(n) = CsMass*sqrt(2*q*voltageArray(n)/CsMass)*log((rocketMass - massOverTime*timeArray(1))/(rocketMass - massOverTime*timeArray(2)));
+        ThrustVoltage(n) = flowRateKgS*sqrt(2*q*voltageArray(n)/CsMass)*log((rocketMass - massOverTime*timeArray(1))/(rocketMass - massOverTime*timeArray(2)));
     end
 end
 
