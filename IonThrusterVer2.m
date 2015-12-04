@@ -19,7 +19,7 @@ m = 9.109*10^-31;       %mass of electron
 CsMass = 2.2085*10^-25; %mass of Cesium
 rocketMass = 2000;      %kilograms
 ionFlowRate = 10000;    %ion/sec
-impulseTime = 12000;    %Time thruster is active (s)
+impulseTime = 6000;    %Time thruster is active (s)
 massOfIon = 1*10^-5;    %kg/ion
 fuelMass = 0.2;         %200 g of fuel
 flowRateKgS = fuelMass / impulseTime;  % 200 g fuel over impulse Time
@@ -53,7 +53,7 @@ for n = 1:impulseTime;      %1:100
     end
 end
 
-acceleration = ThrustTime.*rocketMass;
+acceleration = ThrustTime.*(1/rocketMass);
 
 for n = 1:impulseTime;
     if n == 1
