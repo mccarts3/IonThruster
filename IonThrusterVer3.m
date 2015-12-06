@@ -202,13 +202,13 @@ if (j-1)/2 == 1||(j-1)/2 == 2||(j-1)/2 == 3 || j == 1||(j-1)/2 == 4||(j-1)/2 == 
 end
 subplot(2,5, 5*k - 4);
 plot(timeArray, ThrustTimeCaesium, timeArray, ThrustTimeIndium, timeArray, ThrustTimeMercury);
-title(sprintf('Thrust Vs Time|IonFlowRate = %.1e|10kV', ionFlowRate));
+title(sprintf('Thrust Vs Time|IonFlowRate = %.1e', ionFlowRate));
 xlabel('Time(s)');
 ylabel('Thrust(N)');
 legend('Caesium', 'Indium', 'Mercury');
 subplot(2,5,5*k - 3);
 plot(timeArray, ThrustTimeCaesiumdt, timeArray, ThrustTimeIndiumdt, timeArray, ThrustTimeMercurydt);
-title(sprintf('Thrust Vs. Time|IonFlowRate = %.1e|10kV @c', ionFlowRate'));
+title(sprintf('Thrust Vs. Time|IonFlowRate = %.1e', ionFlowRate'));
 xlabel('Time(s)');
 ylabel('Thrust(N)/dt');
 legend('Caesium', 'Indium', 'Mercury');
@@ -226,9 +226,9 @@ ylabel('Thrust(N)/dt');
 legend('Caesium', 'Indium', 'Mercury');
 subplot(2,5,5*k);
 plot(timeArray, velTimeCaesium, timeArray, velTimeIndium, timeArray, velTimeMercury);
-title(sprintf('Thrust Vs. Time|IonFlowRate = %.1e|10kV @c', ionFlowRate'));
+title(sprintf('Thrust Vs. Time|IonFlowRate = %.1e', ionFlowRate'));
 xlabel('Time(s)');
-ylabel('Velocity (m/(s^{2}))');
+ylabel('Velocity (m/s^{2})');
 legend('Caesium', 'Indium', 'Mercury');
 
 k = k + 1;
